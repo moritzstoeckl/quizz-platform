@@ -1,6 +1,6 @@
 ## Roadmap
 
-- [] Project setup
+- [x] Project setup
   - Springboot
 - [] Swagger Documentation setup
 - [] Docker setup part 1: Database
