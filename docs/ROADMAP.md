@@ -1,0 +1,50 @@
+## Roadmap
+
+- [] Project setup
+  - Springboot
+- [] Swagger Documentation setup
+- [] Docker setup part 1: Database
+  - Create docker-compose.yml
+  - Create 2 services using mysql image: Storing DB and Auth DB
+  - Connect the exposed database to Java project
+- [] Database setup
+  - Add authentication
+  - Make sure that Java project use the correct user
+- [] Authentication
+  - Define DB schema: Roles
+  - Make sure that signed-in user is allowed to do current task depending on his role
+- [] User management
+  - Define DB schema
+  - Implement CRUD
+- [] Quizzes management
+  - Define DB schema
+  - Implement CRUD for Quizzes/Questions/Answer
+  - Please ensure that roles are considered
+- [] Course management
+  - Define DB schema
+  - Implement CRUD
+  - Please ensure that roles are considered
+- [] Course enrollment
+  - Define schema (if needed)
+  - Implement logic
+- [] Quizzes solving
+  - Implement logic
+- [] Course grading
+  - Implement logic
+- [] Course ranking 
+  - Implement logic
+- [] Docker setup part 2: Java server
+  - Create Dockerfile
+  - Create new service in docker compose that will build the Dockerfile
+  - Make that DB connection works like a charm
+- [] Github Pipeline
+  - Read Documentation
+  - yml schema
+  - The pipeline has to build the docker compose
+  - The pipeline has to run unit tests
+  - The pipeline has to deploy a docker image to Github Repository
+- [] Hosting
+  - Find a free provider
+- [] Deployment
+  - Deploy the service
+- (Bonus) Frontend
