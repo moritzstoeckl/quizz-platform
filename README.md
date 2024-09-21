@@ -1,5 +1,15 @@
 # quizz-platform
 
+## Environment Setup (For Development)
+
+This project includes a pre-configured `.env` file with development-specific values.
+
+### Important Notes:
+- The `.env` file contains simple, non-sensitive data for development purposes only.
+- **Do not use this `.env` file in production.**
+- If you need to customize the environment variables for your own setup, feel free to modify the `.env` file locally without committing those changes.
+
+
 ## How it works
  
 - 2 Roles: Teacher and Student
@@ -40,6 +50,4 @@ This project uses **Springdoc OpenAPI** to automatically generate interactive AP
     ```bash
    http://localhost:8080/swagger-ui/index.html
 This will open a web interface where you can interact with and test the API endpoints.
-
-
 
