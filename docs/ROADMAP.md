@@ -3,7 +3,7 @@
 - [x] Project setup
   - Springboot
 - [x] Swagger Documentation setup
-- [] Docker setup part 1: Database
+- [x] Docker setup part 1: Database
   - Create docker-compose.yml
   - Create 2 services using mysql image: Storing DB and Auth DB
   - Connect the exposed database to Java project
