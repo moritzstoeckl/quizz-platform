@@ -8,11 +8,8 @@ import org.springframework.boot.autoconfigure.orm.jpa.HibernateJpaAutoConfigurat
 import org.springframework.context.ApplicationContext;
 import org.springframework.core.env.Environment;
 
-@SpringBootApplication(exclude = {
-		DataSourceAutoConfiguration.class,
-		JpaRepositoriesAutoConfiguration.class,
-		HibernateJpaAutoConfiguration.class
-})public class Application {
+@SpringBootApplication
+public class Application {
 
 	public static void main(String[] args) {
 		SpringApplication.run(Application.class, args);
