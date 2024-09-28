@@ -74,4 +74,4 @@ jspm_packages/
 # Generated files
 out/
 
-.env*
+.env

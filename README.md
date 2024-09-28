@@ -2,13 +2,12 @@
 
 ## Environment Setup (For Development)
 
-This project includes a pre-configured `.env` file with development-specific values.
+### Environment Variables
 
-### Important Notes:
-- The `.env` file contains simple, non-sensitive data for development purposes only.
-- **Do not use this `.env` file in production.**
-- If you need to customize the environment variables for your own setup, feel free to modify the `.env` file locally without committing those changes.
+1. Copy the `.env.example` file to create your own `.env` file:
 
+   ```bash
+   cp .env.example .env
 
 ## How it works
  
