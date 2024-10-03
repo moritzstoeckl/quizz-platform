@@ -1,36 +1,45 @@
 package com.quiz_platform;
 
+import com.quiz_platform.config.EnvConfig;
 import io.github.cdimascio.dotenv.Dotenv;
+import org.slf4j.LoggerFactory;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.boot.autoconfigure.data.jpa.JpaRepositoriesAutoConfiguration;
-import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
-import org.springframework.boot.autoconfigure.orm.jpa.HibernateJpaAutoConfiguration;
-import org.springframework.context.ApplicationContext;
-import org.springframework.core.env.Environment;
+
+import java.util.Map;
+import org.slf4j.Logger;
 
 @SpringBootApplication
 public class Application {
+    private static final Logger logger = LoggerFactory.getLogger(Application.class);
 
-	public static void main(String[] args) {
-		// Load environment variables from .env file
-		Dotenv dotenv = Dotenv.load();
+    public static void main(String[] args) {
+        // Load environment variables from .env file
+        Dotenv dotenv = Dotenv.load();
 
-		// Set environment variables as system properties
-		System.setProperty("storingDb.rootPassword", dotenv.get("STORING_DB_ROOT_PASSWORD"));
-		System.setProperty("storingDb.user", dotenv.get("STORING_DB_USER"));
-		System.setProperty("storingDb.password", dotenv.get("STORING_DB_PASSWORD"));
-		System.setProperty("storingDb.name", dotenv.get("STORING_DB_NAME"));
-		System.setProperty("storingDb.port", dotenv.get("STORING_DB_PORT"));
-		System.setProperty("storingDb.domain", dotenv.get("STORING_DB_DOMAIN"));
+        for (Map.Entry<String, String> storingDbEnvPair : EnvConfig.databaseStoring.entrySet()) {
+            String envValue = dotenv.get(storingDbEnvPair.getValue());
 
-		System.setProperty("authDb.rootPassword", dotenv.get("AUTH_DB_ROOT_PASSWORD"));
-		System.setProperty("authDb.user", dotenv.get("AUTH_DB_USER"));
-		System.setProperty("authDb.password", dotenv.get("AUTH_DB_PASSWORD"));
-		System.setProperty("authDb.name", dotenv.get("AUTH_DB_NAME"));
-		System.setProperty("authDb.port", dotenv.get("AUTH_DB_PORT"));
-		System.setProperty("authDb.domain", dotenv.get("AUTH_DB_DOMAIN"));
-		SpringApplication.run(Application.class, args);
-	}
+            if (envValue == null) {
+                logger.warn("Missing .env: " + storingDbEnvPair.getValue());
+                continue;
+            }
+
+            System.setProperty(storingDbEnvPair.getKey(), envValue);
+        }
+
+        for (Map.Entry<String, String> authDbEnvPair : EnvConfig.authStoring.entrySet()) {
+            String envValue = dotenv.get(authDbEnvPair.getValue());
+
+            if (envValue == null) {
+                logger.warn("Missing .env: " + authDbEnvPair.getValue());
+                continue;
+            }
+
+            System.setProperty(authDbEnvPair.getKey(), envValue);
+        }
+
+        SpringApplication.run(Application.class, args);
+    }
 
 }
