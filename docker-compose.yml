@@ -1,0 +1,42 @@
+version: '3.9'
+
+services:
+  storing-db:
+    image: mysql:8.4.2
+    container_name: storing-db
+    environment:
+      MYSQL_ROOT_PASSWORD: ${STORING_DB_ROOT_PASSWORD}
+      MYSQL_DATABASE: ${STORING_DB_NAME}
+      MYSQL_USER: ${STORING_DB_USER}
+      MYSQL_PASSWORD: ${STORING_DB_PASSWORD}
+    ports:
+      - "${STORING_DB_PORT}:3306"
+    volumes:
+      - storing-db-data:/var/lib/mysql
+    networks:
+      - storing-network
+
+  authentication-db:
+    image: mysql:8.4.2
+    container_name: authentication-db
+    environment:
+      MYSQL_ROOT_PASSWORD: ${AUTH_DB_ROOT_PASSWORD}
+      MYSQL_DATABASE: ${AUTH_DB_NAME}
+      MYSQL_USER: ${AUTH_DB_USER}
+      MYSQL_PASSWORD: ${AUTH_DB_PASSWORD}
+    ports:
+      - "${AUTH_DB_PORT}:3306"
+    volumes:
+      - authentication-db-data:/var/lib/mysql
+    networks:
+      - authentication-network
+
+volumes:
+  storing-db-data:
+  authentication-db-data:
+
+networks:
+  storing-network:
+    driver: bridge
+  authentication-network:
+    driver: bridge
