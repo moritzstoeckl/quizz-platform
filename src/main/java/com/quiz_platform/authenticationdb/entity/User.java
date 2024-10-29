@@ -1,18 +1,15 @@
 package com.quiz_platform.authenticationdb.entity;
 
 import jakarta.persistence.*;
-import lombok.Data;
-import lombok.Getter;
 
 @Entity
 @Table(name = "users")
-@Data
+//@Data
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Getter
     @Column(unique = true, nullable = false)
     private String username;
 

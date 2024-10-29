@@ -1,15 +1,11 @@
 package com.quiz_platform.authenticationdb.entity;
 
 import jakarta.persistence.*;
-import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
 
 import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "sessions")
-@Data
 public class Session {
 
     @Id
@@ -29,8 +25,6 @@ public class Session {
     @Column(nullable = false)
     private LocalDateTime expiresAt;
 
-    @Setter
-    @Getter
     @Column(nullable = false)
     private boolean isActive;
 
