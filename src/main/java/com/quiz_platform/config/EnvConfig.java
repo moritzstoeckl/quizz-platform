@@ -21,5 +21,4 @@ public class EnvConfig {
             Map.entry("authDb.domain", "AUTH_DB_DOMAIN"),
             Map.entry("authDb.ddl-auto", "AUTH_DB_DDL_AUTO")
     );
-
 }

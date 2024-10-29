@@ -9,6 +9,19 @@
    ```bash
    cp .env.example .env
 
+## Database Initialization
+   1. Start Docker with the necessary database containers.
+
+   2. Manually create the auth_db database by logging into the database using the following commands:
+
+      To login to auth_db, run:
+
+      ``mysql -u auth_user -p -h 127.0.0.1 -P 3307 auth_db``
+
+   3. Once logged in, execute the SQL scripts to create tables:
+
+   ``source schema-authdb.sql;``
+
 ## How it works
  
 - 2 Roles: Teacher and Student
