@@ -1,7 +1,7 @@
 package com.quiz_platform.controller;
 
-import com.quiz_platform.controller.response.AuthResponse;
 import com.quiz_platform.authenticationdb.service.AuthenticationService;
+import com.quiz_platform.controller.response.AuthResponse;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,9 +29,12 @@ public class AuthController {
     )
     public ResponseEntity<AuthResponse> login(@Parameter(description = "Username of the user", required = true) @RequestParam String username,
                                               @Parameter(description = "Password of the user", required = true) @RequestParam String password) {
-        return authenticationService.login(username, password)
-                .map(ResponseEntity::ok)
-                .orElse(ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(null));
+        AuthResponse authResponse = authenticationService.login(username, password);
+
+        if (authResponse.isError()) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(authResponse);
+        }
+        return ResponseEntity.ok(authResponse);
     }
 
 
