@@ -27,23 +27,27 @@ public class AuthenticationService {
 
     /**
      * Authenticates a user by validating the provided username and password.
-     * If valid a new session is created.
+     * If valid, a new session is created and returned in the response.
      *
-     * @param username
-     * @param password
-     * @return an Optional with AuthResponse if valid or empty if the credentials are invalid.
+     * @param username the username of the user attempting to log in
+     * @param password the password of the user attempting to log in
+     * @return an AuthResponse with either a success message and token or a failure message.
      */
-    public Optional<AuthResponse> login(String username, String password) {
+    public AuthResponse login(String username, String password) {
         Optional<User> user = userService.findByUsername(username);
 
-        if (user.isPresent() && passwordEncoder.matches(password, user.get().getPassword())) {
-            Session session = sessionService.createSession(user.get());
-            AuthResponse authResponse = new AuthResponse(session.getJwtToken(),"successfully logged in", false );
-            return Optional.of(authResponse);
-        } else {
-            return Optional.empty();  // Invalid credentials
+        if (user.isEmpty()) {
+            return new AuthResponse(null, "User not found", true);
         }
+
+        if (!passwordEncoder.matches(password, user.get().getPassword())) {
+            return new AuthResponse(null, "Incorrect password", true);
+        }
+
+        Session session = sessionService.createSession(user.get());
+        return new AuthResponse(session.getJwtToken(), "Successfully logged in", false);
     }
+
 
     public boolean logout(String sessionToken) {
         return sessionService.deactivateToken(sessionToken);
