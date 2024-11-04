@@ -11,6 +11,8 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 import java.time.ZoneId;
+import java.util.Date;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -28,7 +30,14 @@ public class SessionService {
      */
     @Scheduled(cron = "0 0 0 * * ?")
     public void cleanupExpiredSessions() {
-        sessionRepository.deleteByExpiresAtBefore(LocalDateTime.now());
+        List<Session> allSessions = sessionRepository.findAll();
+
+        for (Session session : allSessions) {
+            Date expiresAt = getExpiryDate(session.getJwtToken());
+            if (expiresAt.before(new Date())) {
+                sessionRepository.delete(session);
+            }
+        }
     }
 
     /**
@@ -42,7 +51,7 @@ public class SessionService {
 
         if (sessionOptional.isPresent()) {
             Session session = sessionOptional.get();
-            if (session.isActive() && !session.getExpiresAt().isBefore(LocalDateTime.now())) {
+            if (session.isActive() && getExpiryDate(session.getJwtToken()).before(new Date())) {
                 try {
                     jwtUtil.verifyToken(jwtToken);
                     return true;
@@ -59,7 +68,7 @@ public class SessionService {
 
         DecodedJWT decodedJWT = jwtUtil.verifyToken(jwtToken);
         LocalDateTime expiresAt = LocalDateTime.ofInstant(decodedJWT.getExpiresAt().toInstant(), ZoneId.systemDefault());
-        Session session = new Session(jwtToken, expiresAt, user, true);
+        Session session = new Session(jwtToken, user, true);
 
         return sessionRepository.save(session);
     }
@@ -77,5 +86,9 @@ public class SessionService {
             return true; // Successfully invalidated
         }
         return false; // Session not found or already inactive
+    }
+
+    public Date getExpiryDate(String jwtToken) {
+        return jwtUtil.decodeJWT(jwtToken).getExpiresAt();
     }
 }

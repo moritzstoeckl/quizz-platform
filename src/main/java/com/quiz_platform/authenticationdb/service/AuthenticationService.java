@@ -2,7 +2,7 @@ package com.quiz_platform.authenticationdb.service;
 
 import com.quiz_platform.authenticationdb.entity.Session;
 import com.quiz_platform.authenticationdb.entity.User;
-import com.quiz_platform.authenticationdb.response.AuthResponse;
+import com.quiz_platform.controller.response.AuthResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -38,7 +38,7 @@ public class AuthenticationService {
 
         if (user.isPresent() && passwordEncoder.matches(password, user.get().getPassword())) {
             Session session = sessionService.createSession(user.get());
-            AuthResponse authResponse = new AuthResponse(session.getJwtToken(), session.getExpiresAt());
+            AuthResponse authResponse = new AuthResponse(session.getJwtToken(),"successfully logged in", false );
             return Optional.of(authResponse);
         } else {
             return Optional.empty();  // Invalid credentials
