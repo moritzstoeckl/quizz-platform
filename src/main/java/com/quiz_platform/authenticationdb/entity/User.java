@@ -16,8 +16,11 @@ public class User {
     @Column(nullable = false)
     private String password;
 
+    /**
+     * false if user has to be deactivated but should not be deleted.
+     */
     @Column(nullable = false)
-    private boolean isDeactivated; // false if user has to be deactivated but should not be deleted.
+    private boolean isDeactivated;
 
     public User(String username, String password, boolean isDeactivated) {
         this.username = username;
