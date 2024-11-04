@@ -60,7 +60,7 @@ public class SessionService {
                 }
             }
         }
-        return false; // Session is not found or inactive/expired
+        return false;
     }
 
     public Session createSession(User user) {
@@ -83,9 +83,9 @@ public class SessionService {
             Session session = sessionOptional.get();
             session.setActive(false);
             sessionRepository.save(session);
-            return true; // Successfully invalidated
+            return true;
         }
-        return false; // Session not found or already inactive
+        return false;
     }
 
     public Date getExpiryDate(String jwtToken) {
