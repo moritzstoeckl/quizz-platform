@@ -13,7 +13,7 @@
 
 - `JWT_SECRET`: A required secret key used to sign JSON Web Tokens (JWTs) for secure authentication. **Ensure this is a strong, unique value, especially in production.**  
   - For local development, you may set a placeholder value (e.g., `JWT_SECRET=local_secret_key`).
-```
+
 
 
 ## Database Initialization
@@ -27,7 +27,7 @@
 
    3. Once logged in, execute the SQL scripts to create tables:
 
-   ``source schema-authdb.sql;``
+   ``source scripts/sql/schema-authdb.sql;``
 
 ## How it works
  
