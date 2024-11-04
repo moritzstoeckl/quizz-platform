@@ -9,6 +9,13 @@
    ```bash
    cp .env.example .env
 
+#### JWT Secret
+
+- `JWT_SECRET`: A required secret key used to sign JSON Web Tokens (JWTs) for secure authentication. **Ensure this is a strong, unique value, especially in production.**  
+  - For local development, you may set a placeholder value (e.g., `JWT_SECRET=local_secret_key`).
+```
+
+
 ## Database Initialization
    1. Start Docker with the necessary database containers.
 
