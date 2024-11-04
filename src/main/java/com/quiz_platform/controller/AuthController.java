@@ -1,6 +1,6 @@
 package com.quiz_platform.controller;
 
-import com.quiz_platform.authenticationdb.response.AuthResponse;
+import com.quiz_platform.controller.response.AuthResponse;
 import com.quiz_platform.authenticationdb.service.AuthenticationService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
