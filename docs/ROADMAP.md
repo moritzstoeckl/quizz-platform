@@ -7,7 +7,7 @@
   - Create docker-compose.yml
   - Create 2 services using mysql image: Storing DB and Auth DB
   - Connect the exposed database to Java project
-- [] Database setup
+- [x] Database setup
   - Add authentication
   - Make sure that Java project use the correct user
 - [] Authentication
