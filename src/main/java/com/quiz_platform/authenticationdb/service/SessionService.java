@@ -51,7 +51,7 @@ public class SessionService {
 
         if (sessionOptional.isPresent()) {
             Session session = sessionOptional.get();
-            if (session.isActive() && getExpiryDate(session.getJwtToken()).before(new Date())) {
+            if (session.isLoggedIn() && getExpiryDate(session.getJwtToken()).before(new Date())) {
                 try {
                     jwtUtil.verifyToken(jwtToken);
                     return true;
@@ -79,9 +79,9 @@ public class SessionService {
      */
     public boolean deactivateToken(String jwtToken) {
         Optional<Session> sessionOptional = sessionRepository.findByJwtToken(jwtToken);
-        if (sessionOptional.isPresent() && sessionOptional.get().isActive()) {
+        if (sessionOptional.isPresent() && sessionOptional.get().isLoggedIn()) {
             Session session = sessionOptional.get();
-            session.setActive(false);
+            session.setLoggedIn(false);
             sessionRepository.save(session);
             return true;
         }

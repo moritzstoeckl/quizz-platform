@@ -2,8 +2,6 @@ package com.quiz_platform.authenticationdb.entity;
 
 import jakarta.persistence.*;
 
-import java.time.LocalDateTime;
-
 @Entity
 @Table(name = "sessions")
 public class Session {
@@ -19,13 +17,20 @@ public class Session {
     @JoinColumn(name = "user_id", nullable = false)
     private User user;
 
-    @Column(nullable = false)
-    private boolean isActive;
 
-    public Session(String jwtToken, User user, boolean isActive) {
+    /**
+     * Indicates whether the session is active and the user is currently logged in.
+     * This field helps to keep track of active user sessions without relying solely on the existence of a session token.
+     * It allows for efficient checks and cleanup of sessions, especially in cases where a session may be invalidated
+     * or where multiple sessions need to be managed for a single user.
+     */
+    @Column(nullable = false)
+    private boolean isLoggedIn;
+
+    public Session(String jwtToken, User user, boolean isLoggedIn) {
         this.jwtToken = jwtToken;
         this.user = user;
-        this.isActive = isActive;
+        this.isLoggedIn = isLoggedIn;
     }
 
     public Session() {
@@ -55,11 +60,11 @@ public class Session {
         this.user = user;
     }
 
-    public boolean isActive() {
-        return isActive;
+    public boolean isLoggedIn() {
+        return isLoggedIn;
     }
 
-    public void setActive(boolean active) {
-        isActive = active;
+    public void setLoggedIn(boolean loggedIn) {
+        isLoggedIn = loggedIn;
     }
 }

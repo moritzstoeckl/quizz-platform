@@ -11,6 +11,6 @@ CREATE TABLE IF NOT EXISTS sessions (
     id BIGINT AUTO_INCREMENT PRIMARY KEY,
     jwtToken VARCHAR(255) UNIQUE NOT NULL,
     user_id BIGINT NOT NULL,
-    isActive BOOLEAN NOT NULL,
+    isLoggedIn BOOLEAN NOT NULL,
     CONSTRAINT fk_user FOREIGN KEY (user_id) REFERENCES users(id)
     );
