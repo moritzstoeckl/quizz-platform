@@ -1,6 +1,7 @@
 package com.quiz_platform.controller;
 
 import com.quiz_platform.authenticationdb.service.UserService;
+import com.quiz_platform.controller.response.ApiResponse;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,10 +23,17 @@ public class UserController {
             summary = "Create New User",
             description = "Creates a new user with the specified username and password."
     )
-    public ResponseEntity<String> createUser(
+    public ResponseEntity<ApiResponse> createUser(
             @Parameter(description = "Username for the new user", required = true) @RequestParam String name,
             @Parameter(description = "Password for the new user", required = true) @RequestParam String password) {
-        userService.createUser(name, password);
-        return ResponseEntity.ok("User created successfully");
+
+        try {
+            userService.createUser(name, password);
+            ApiResponse response = new ApiResponse(false, "User created successfully");
+            return ResponseEntity.ok(response);
+        } catch (IllegalArgumentException e) {
+            ApiResponse errorResponse = new ApiResponse(true, e.getMessage());
+            return ResponseEntity.ok(errorResponse);
+        }
     }
 }
