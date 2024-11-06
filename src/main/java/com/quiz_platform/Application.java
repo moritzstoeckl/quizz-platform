@@ -38,6 +38,8 @@ public class Application {
 
             System.setProperty(authDbEnvPair.getKey(), envValue);
         }
+        System.setProperty("JWT_SECRET", dotenv.get("JWT_SECRET"));
+
 
         SpringApplication.run(Application.class, args);
     }
