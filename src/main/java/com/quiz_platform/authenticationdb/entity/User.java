@@ -2,6 +2,8 @@ package com.quiz_platform.authenticationdb.entity;
 
 import jakarta.persistence.*;
 
+import java.util.Objects;
+
 @Entity
 @Table(name = "users")
 public class User {
@@ -21,13 +23,23 @@ public class User {
     @Column(nullable = false)
     private boolean isDeactivated;
 
-    public User(String username, String password, boolean isDeactivated) {
+    @Enumerated(EnumType.STRING)
+    @Column(name = "user_role", nullable = false)
+    private Role userRole;
+
+    public User(String username, String password, boolean isDeactivated, Role userRole) {
         this.username = username;
         this.password = password;
         this.isDeactivated = isDeactivated;
+        this.userRole = Objects.requireNonNullElse(userRole, Role.STUDENT);
     }
 
     public User() {
+    }
+    public enum Role {
+        ADMIN,
+        TEACHER,
+        STUDENT
     }
 
     public String getUsername() {
