@@ -9,6 +9,26 @@
    ```bash
    cp .env.example .env
 
+#### JWT Secret
+
+- `JWT_SECRET`: A required secret key used to sign JSON Web Tokens (JWTs) for secure authentication. **Ensure this is a strong, unique value, especially in production.**  
+  - For local development, you may set a placeholder value (e.g., `JWT_SECRET=local_secret_key`).
+
+
+
+## Database Initialization
+   1. Start Docker with the necessary database containers.
+
+   2. Manually create the auth_db database by logging into the database using the following commands:
+
+      To login to auth_db, run:
+
+      ``mysql -u auth_user -p -h 127.0.0.1 -P 3307 auth_db``
+
+   3. Once logged in, execute the SQL scripts to create tables:
+
+   ``source scripts/sql/schema-authdb.sql;``
+
 ## How it works
  
 - 2 Roles: Teacher and Student
