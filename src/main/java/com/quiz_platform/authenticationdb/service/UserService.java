@@ -14,10 +14,8 @@ import java.util.Optional;
 public class UserService {
     private final BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 
-
     @PersistenceContext(unitName = "authDbPU")
     private EntityManager entityManager;
-
 
     @Autowired
     private UserRepository userRepository;
@@ -33,17 +31,29 @@ public class UserService {
     /**
      * Encrypts the password before storing the new user in the database.
      *
-     * @param username
-     * @param password
-     * @return returns the saved User.
+     * @param username the username of the new user (must not be null)
+     * @param password the raw password of the new user (must not be null)
+     * @param role     the role of the new user; if null, a default role will be assigned
+     * @throws IllegalArgumentException if any required parameter is null or if the username already exists.
      */
-    public User createUser(String username, String password) {
+    public void createUser(String username, String password, User.Role role) {
+        if (username == null) {
+            throw new IllegalArgumentException("Username cannot be null.");
+        }
+        if (password == null) {
+            throw new IllegalArgumentException("Password cannot be null.");
+        }
+        if (role.equals(User.Role.ADMIN)) {
+            throw new IllegalArgumentException("You cannot create a user with an admin role.");
+        }
         if (findByUsername(username).isPresent()) {
             throw new IllegalArgumentException("User with this username already exists.");
         }
+
         String hashedPassword = passwordEncoder.encode(password);
 
-        User user = new User(username, hashedPassword, false);
-        return userRepository.save(user);
+        User user = new User(username, hashedPassword, false, role);
+        userRepository.save(user);
     }
+
 }
