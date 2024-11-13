@@ -36,6 +36,7 @@ public class User {
 
     public User() {
     }
+
     public enum Role {
         ADMIN,
         TEACHER,
@@ -72,6 +73,10 @@ public class User {
 
     public void setDeactivated(boolean deactivated) {
         isDeactivated = deactivated;
+    }
+
+    public Role getUserRole() {
+        return userRole;
     }
 }
 
