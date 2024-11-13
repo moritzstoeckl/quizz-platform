@@ -18,8 +18,8 @@ public class AuthenticationService {
 
     @Autowired
     private SessionService sessionService;
-    private final PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 
+    private final PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 
     public boolean verifyToken(String token) {
         return sessionService.verifyToken(token);
@@ -47,7 +47,6 @@ public class AuthenticationService {
         Session session = sessionService.createSession(user.get());
         return new AuthResponse(session.getJwtToken(), "Successfully logged in", false);
     }
-
 
     public boolean logout(String sessionToken) {
         return sessionService.deactivateToken(sessionToken);
