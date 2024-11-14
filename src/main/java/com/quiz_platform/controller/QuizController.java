@@ -1,6 +1,6 @@
 package com.quiz_platform.controller;
 
-import com.quiz_platform.authenticationdb.service.RequiresRole;
+import com.quiz_platform.authenticationdb.service.role.RequiresRole;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;

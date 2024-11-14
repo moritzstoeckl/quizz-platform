@@ -1,4 +1,4 @@
-package com.quiz_platform.authenticationdb.service;
+package com.quiz_platform.authenticationdb.service.role;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
