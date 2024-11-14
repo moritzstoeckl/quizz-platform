@@ -32,7 +32,7 @@ public class RoleAspect {
         String requiredRole = requiresRole.value();
 
         String jwtToken = Arrays.stream(joinPoint.getArgs())
-                .filter(arg -> arg instanceof String && ((String) arg).startsWith("ey"))
+                .filter(arg -> arg instanceof String)
                 .map(arg -> (String) arg)
                 .findFirst()
                 .orElseThrow(() -> new UnauthorizedAccessException("No token provided"));
