@@ -1,6 +1,5 @@
 package com.quiz_platform.authenticationdb.service.role;
 
-import com.quiz_platform.authenticationdb.service.RoleChecker;
 import com.quiz_platform.authenticationdb.service.exception.UnauthorizedAccessException;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.Aspect;

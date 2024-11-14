@@ -1,6 +1,8 @@
-package com.quiz_platform.authenticationdb.service;
+package com.quiz_platform.authenticationdb.service.role;
 
 import com.quiz_platform.authenticationdb.entity.User;
+import com.quiz_platform.authenticationdb.service.JwtUtil;
+import com.quiz_platform.authenticationdb.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
