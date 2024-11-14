@@ -23,7 +23,7 @@ public class QuizController {
             }
     )
     @GetMapping("/")
-    //TODO is a test endpoint
+    //TODO
     public String hello() {
         return "Hello, Spring Boot is running!";
     }
@@ -37,7 +37,7 @@ public class QuizController {
     )
     public ResponseEntity<String> testUserRole(@Parameter(description = "JWT token of the session to be terminated", required = true)
                                                @RequestParam String jwtToken) {
-        //TODO is a test endpoint for role checking
+        // TODO: Remove test endpoint after the implementation is completed
         return ResponseEntity.ok("Hello, Authentication and role-based access control work!");
     }
 }
